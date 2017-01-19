@@ -7,14 +7,20 @@
     url: https://justgetflux.com/mac/Flux.zip
     archive_type: zip
     archive_path: "Flux.app"
-  notify: restart flux
+  # notify: restart flux
 
+- name: get current location
+  shell: LocateMe -f {LAT},{LON}
+  register: location
+  changed_when: no
+  
 - name: Configure flux location
   osx_defaults:
     domain: org.herf.Flux.plist
     key: location
     type: string
-    value: "40.007300,-105.258000"
+    value: "{{ location.stdout }}"
+  # notify: restart flux
 
 - name: Determine if flux is running
   command: "pgrep Flux"
