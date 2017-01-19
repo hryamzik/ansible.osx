@@ -1,17 +1,49 @@
 ---
-
 - include: flux.yml
+  when: "{{ install_flux }}"
 - include: chrome.yml
+  when: "{{ install_chrome }}"
 - include: firefox.yml
+  when: "{{ install_firefox }}"
 - include: virtualbox.yml
+  when: "{{ install_virtualbox }}"
 - include: vagrant.yml
+  when: "{{ install_vagrant }}"
 - include: docker-toolbox.yml
+  when: "{{ install_docker-toolbox }}"
 - include: iterm.yml
+  when: "{{ install_iterm }}"
 - include: textmate.yml
+  when: "{{ install_textmate }}"
 - include: vlc.yml
+  when: "{{ install_vlc }}"
 - include: dropbox.yml
+  when: "{{ install_dropbox }}"
 - include: steam.yml
+  when: "{{ install_steam }}"
 - include: spectacle.yml
+  when: "{{ install_spectacle }}"
 - include: adium.yml
+  when: "{{ install_adium }}"
 - include: hipchat.yml
+  when: "{{ install_hipchat }}"
 - include: rdio.yml
+  when: "{{ install_rdio }}"
+- include: docker.yml
+  when: "{{ install_docker }}"
+- include: whatsapp.yml
+  when: "{{ install_whatsapp }}"
+- include: limechat.yml
+  when: "{{ install_limechat }}"
+- include: dash.yml
+  when: "{{ install_dash }}"
+- include: viber.yml
+  when: "{{ install_viber }}"
+- include: googledrive.yml
+  when: "{{ install_google }}"
+- include: skype.yml
+  when: "{{ install_skype }}"
+- include: insomnia.yml
+  when: "{{ install_insomnia }}"
+- include: bettertouchtool.yml
+  when: "{{ install_btt }}"
