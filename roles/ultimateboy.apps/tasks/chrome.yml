@@ -8,48 +8,48 @@
     archive_type: dmg
     archive_path: "Google Chrome.app"
 
-- name: Chrome - get default browser
-  shell: defaultbrowser | sed 's/Current:\ //' | head -1
-  register: defaultbrowser_value
-  changed_when: False
-
-- name: Chrome - set as default browser
-  command: defaultbrowser -set chrome
-  when: defaultbrowser_value.stdout != "chrome"
-
-- name: Chrome - create extensions directory for all users
-  become: true
-  file:
-    path: /Library/Application Support/Google/Chrome/External Extensions
-    state: directory
-
-- name: Chrome - create json file to install extensions for all users
-  become: true
-  template:
-    src: ../templates/chrome-extensions.json.j2
-    dest: /Library/Application Support/Google/Chrome/External Extensions/{{ item.id }}.json
-  with_items:
-    - name: wave-evaluation-tool
-      id: jbbplnpkjmmeebjpijfedlgcdilocofh
-    - name: jsonview
-      id: chklaanhfefbnpoihckbnefhakgolnmc
-    - name: ModHeader
-      id: idgpnmonknjnojddfkpgkljpfnnfcklj
-    - name: Cookie Inspector
-      id: jgbbilmfbammlbbhmmgaagdkbkepnijn
-    - name: stylish
-      id: fjnbnpbmkenffdnngjfgmeleoegfcffe
-    - name: builtwith-technology-prof
-      id: dapjbgnjinbpoindlpdmhochffioedbn
-    - name: kimono
-      id: deoaddaobnieaecelinfdllcgdehimih
-    - name: isometric-contributions
-      id: mjoedlfflcchnleknnceiplgaeoegien
-    - name: github-submodule-links
-      id: ncoknneddcolmgfnmcbemhhaghjdlkkb
-    - name: google-hangouts
-      id: nckgahadagoaajjgafhacjanaoiihapd
-    - name: postman
-      id: fhbjgbiflinjbdggehcddcbncdddomop
-    - name: dreditor
-      id: dhdpoembhlojpmehepeadblhglloobao
+# - name: Chrome - get default browser
+#   shell: defaultbrowser | sed 's/Current:\ //' | head -1
+#   register: defaultbrowser_value
+#   changed_when: False
+#
+# - name: Chrome - set as default browser
+#   command: defaultbrowser -set chrome
+#   when: defaultbrowser_value.stdout != "chrome"
+#
+# - name: Chrome - create extensions directory for all users
+#   become: true
+#   file:
+#     path: /Library/Application Support/Google/Chrome/External Extensions
+#     state: directory
+#
+# - name: Chrome - create json file to install extensions for all users
+#   become: true
+#   template:
+#     src: ../templates/chrome-extensions.json.j2
+#     dest: /Library/Application Support/Google/Chrome/External Extensions/{{ item.id }}.json
+#   with_items:
+#     - name: wave-evaluation-tool
+#       id: jbbplnpkjmmeebjpijfedlgcdilocofh
+#     - name: jsonview
+#       id: chklaanhfefbnpoihckbnefhakgolnmc
+#     - name: ModHeader
+#       id: idgpnmonknjnojddfkpgkljpfnnfcklj
+#     - name: Cookie Inspector
+#       id: jgbbilmfbammlbbhmmgaagdkbkepnijn
+#     - name: stylish
+#       id: fjnbnpbmkenffdnngjfgmeleoegfcffe
+#     - name: builtwith-technology-prof
+#       id: dapjbgnjinbpoindlpdmhochffioedbn
+#     - name: kimono
+#       id: deoaddaobnieaecelinfdllcgdehimih
+#     - name: isometric-contributions
+#       id: mjoedlfflcchnleknnceiplgaeoegien
+#     - name: github-submodule-links
+#       id: ncoknneddcolmgfnmcbemhhaghjdlkkb
+#     - name: google-hangouts
+#       id: nckgahadagoaajjgafhacjanaoiihapd
+#     - name: postman
+#       id: fhbjgbiflinjbdggehcddcbncdddomop
+#     - name: dreditor
+#       id: dhdpoembhlojpmehepeadblhglloobao
