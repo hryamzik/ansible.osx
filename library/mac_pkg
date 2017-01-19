@@ -194,12 +194,12 @@ class Archive(object):
                         os.unlink(file_path)
 
             if do_download:
-                download_cmd = "%s --insecure --silent --location %s %s '%s'" % (
+                download_cmd = "%s --silent --location %s %s '%s'" % (
                         self.curl_path, output_opts, curl_opts, url)
                 # self.module.exit_json(changed=False, msg="download_cmd %s" % download_cmd)
                 rc, out, err = run_command(self.module, download_cmd, cwd=cwd)
                 if rc > 0:
-                    self.module.fail_json(msg="failed to download %s: %s\n\t%s" % (self.pkg.name(), out, err))
+                    self.module.fail_json(msg="failed to download %s: '%s' '%s'" % (self.pkg.name(), out, err))
                 acquired = True
 
             if not exists(self.params, 'dest'):
