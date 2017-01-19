@@ -50,3 +50,7 @@
 ```
 
 `mas` is used for app store installations, `locateme` is required for flux setup.
+
+## Warning
+
+Only some apps at `apps` role are tested. Other roles were not tested as well.
