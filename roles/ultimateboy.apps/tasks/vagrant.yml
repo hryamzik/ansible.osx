@@ -5,11 +5,22 @@
   register: vagrant_version
   changed_when: False
 
+- name: Get URL for a new version if any
+  uri:
+      url: "https://releases.hashicorp.com/vagrant/"
+      method: GET
+      return_content: yes
+  register: latest_list
+  
+- set_fact:
+    latest_version: "{{ ((latest_list.content|striptags).split(' ')|map('regex_search', '^vagrant_[0-9,.]+$')|select()|map('replace','vagrant_','')|list)[0] }}"
+    
+# https://releases.hashicorp.com/vagrant/1.8.7/vagrant_1.8.7.dmg
 - name: Install Vagrant
   become: true
   mac_pkg:
     pkg_type: pkg
-    url: https://releases.hashicorp.com/vagrant/1.7.4/vagrant_1.7.4.dmg
+    url: "https://releases.hashicorp.com/vagrant/{{ latest_version }}/vagrant_{{ latest_version }}.dmg"
     archive_type: dmg
     archive_path: "Vagrant.pkg"
-  when: vagrant_version.stdout != "1.7.4"
+  when: "{{ latest_version|version_compare('1.7.0' if vagrant_version.stdout == '' else vagrant_version.stdout, '>') }}"

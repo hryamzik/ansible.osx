@@ -5,11 +5,38 @@
   register: virtualbox_version
   changed_when: False
 
+# - name: Get URL for a new version if any
+#   uri:
+#       url: "https://update.virtualbox.org/query.php?platform=DARWIN_64BITS_GENERIC&version={{ '5.0.0' if virtualbox_version.stdout == '' else virtualbox_version.stdout }}&branch=stable"
+#       method: GET
+#       return_content: yes
+#   register: update
+#   changed_when: "{{ update.content != 'UPTODATE' }}"
+
+- name: Get URL for a new version if any
+  uri:
+      url: "http://download.virtualbox.org/virtualbox/LATEST.TXT"
+      method: GET
+      return_content: yes
+  register: latest
+
+- name: Get URL for a new version if any
+  uri:
+      url: "http://download.virtualbox.org/virtualbox/{{ latest.content|trim }}/MD5SUMS"
+      method: GET
+      return_content: yes
+  register: latest_list
+
+- name: show url
+  debug: msg="http://download.virtualbox.org/virtualbox/{{ latest.content|trim }}/{{ (latest_list.content.split(\n)|map('regex_search', '\\S+.dmg')|select()|list)[0][1:] }}"
+
 - name: Install VirtualBox
   become: true
   mac_pkg:
     pkg_type: pkg
-    url: http://download.virtualbox.org/virtualbox/5.0.8/VirtualBox-5.0.8-103449-OSX.dmg
+    url: "http://download.virtualbox.org/virtualbox/{{ latest.content|trim }}/{{ (latest_list.content.split(\n)|map('regex_search', '\\S+.dmg')|select()|list)[0][1:] }}"
     archive_type: dmg
     archive_path: "VirtualBox.pkg"
-  when: virtualbox_version.stdout != "5.0.8"
+  when: "{{ latest.content|trim|version_compare('5.0.0' if virtualbox_version.stdout == '' else virtualbox_version.stdout, '>') }}"
+
+# http://download.virtualbox.org/virtualbox/5.1.8/Oracle_VM_VirtualBox_Extension_Pack-5.1.8.vbox-extpack
