@@ -1,0 +1,9 @@
+---
+
+- name: Install Viber
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://download.cdn.viber.com/desktop/mac/Viber.dmg
+    archive_type: dmg
+    archive_path: "Viber.app"

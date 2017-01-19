@@ -1,0 +1,9 @@
+---
+
+- name: Install Dash
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://frankfurt.kapeli.com/downloads/v2/Dash.zip
+    archive_type: zip
+    archive_path: "Dash.app"

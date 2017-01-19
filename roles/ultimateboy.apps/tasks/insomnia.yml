@@ -1,0 +1,9 @@
+---
+
+- name: Install Insomnia
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://builds.insomnia.rest/downloads/mac/latest
+    archive_type: dmg
+    archive_path: "Insomnia.app"

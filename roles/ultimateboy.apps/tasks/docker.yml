@@ -1,0 +1,9 @@
+---
+
+- name: Install Docker
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://download.docker.com/mac/stable/Docker.dmg
+    archive_type: dmg
+    archive_path: "Docker.app"

@@ -1,0 +1,9 @@
+---
+
+- name: Install Limechat
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://downloads.sourceforge.net/project/limechat/limechat/LimeChat_2.42.tbz?use_mirror=master
+    archive_type: tar
+    archive_path: "LimeChat.app"

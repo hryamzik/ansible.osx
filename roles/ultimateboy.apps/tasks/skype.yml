@@ -1,0 +1,9 @@
+---
+
+- name: Install Skype
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://download.skype.com/macosx/2773721d64fdbbbfd84c6dd74d6d66e0/Skype_7.39.176.dmg
+    archive_type: dmg
+    archive_path: "Skype.app"

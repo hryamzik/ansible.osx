@@ -1,0 +1,9 @@
+---
+
+- name: Install WhatsApp
+  become: true
+  mac_pkg:
+    pkg_type: app
+    url: https://web.whatsapp.com/desktop/mac/files/WhatsApp.dmg
+    archive_type: dmg
+    archive_path: "WhatsApp.app"
