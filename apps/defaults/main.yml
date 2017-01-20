@@ -3,7 +3,7 @@ install_chrome: no
 install_firefox: no
 install_virtualbox: no
 install_vagrant: no
-install_docker-toolbox: no
+install_docker_toolbox: no
 install_iterm: no
 install_textmate: no
 install_vlc: no

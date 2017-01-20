@@ -10,7 +10,7 @@
 - include: vagrant.yml
   when: "{{ install_vagrant }}"
 - include: docker-toolbox.yml
-  when: "{{ install_docker-toolbox }}"
+  when: "{{ install_docker_toolbox }}"
 - include: iterm.yml
   when: "{{ install_iterm }}"
 - include: textmate.yml
