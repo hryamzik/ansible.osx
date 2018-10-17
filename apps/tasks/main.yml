@@ -7,8 +7,10 @@
   when: "{{ install_firefox }}"
 - include: virtualbox.yml
   when: "{{ install_virtualbox }}"
+  tags: vbox
 - include: vagrant.yml
   when: "{{ install_vagrant }}"
+  tags: vagrant
 - include: docker-toolbox.yml
   when: "{{ install_docker_toolbox }}"
 - include: iterm.yml

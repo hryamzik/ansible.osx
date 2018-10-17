@@ -15,12 +15,16 @@
 - set_fact:
     latest_version: "{{ ((latest_list.content|striptags).split(' ')|map('regex_search', '^vagrant_[0-9,.]+$')|select()|map('replace','vagrant_','')|list)[0] }}"
     
+- debug: msg="latest = {{ latest_version }}, local = {{ vagrant_version.stdout }}"
+
 # https://releases.hashicorp.com/vagrant/1.8.7/vagrant_1.8.7.dmg
 - name: Install Vagrant
   become: true
   mac_pkg:
     pkg_type: pkg
-    url: "https://releases.hashicorp.com/vagrant/{{ latest_version }}/vagrant_{{ latest_version }}.dmg"
+    # url: "https://releases.hashicorp.com/vagrant/{{ latest_version }}/vagrantgrant_{{ latest_version }}.dmg"
+    url: "https://releases.hashicorp.com/vagrant/{{ latest_version }}/vagrant_{{ latest_version }}{{ '_x86_64' if latest_version|version_compare('2.0.0', '>=') else '' }}.dmg"
+    # https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.dmg
     archive_type: dmg
     archive_path: "Vagrant.pkg"
   when: "{{ latest_version|version_compare('1.7.0' if vagrant_version.stdout == '' else vagrant_version.stdout, '>') }}"
