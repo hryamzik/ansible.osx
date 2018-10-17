@@ -77,7 +77,7 @@ def run_command(module, args, check_rc=False, close_fds=False, executable=None, 
             cmd.stdin.write('\n')
         out, err = cmd.communicate()
         rc = cmd.returncode
-    except (OSError, IOError), e:
+    except (OSError, IOError) as e:
         module.fail_json(rc=e.errno, msg=str(e), cmd=args)
     except:
         module.fail_json(rc=257, msg=traceback.format_exc(), cmd=args)
